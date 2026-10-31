@@ -1,0 +1,17 @@
+{
+  "name": "querysnap",
+  "version": "1.0.0",
+  "description": "Run MySQL queries and save each query with its result grid as a PNG screenshot.",
+  "main": "snap.js",
+  "scripts": {
+    "snap": "node snap.js examples/example-queries.sql screenshots"
+  },
+  "keywords": ["mysql", "sql", "screenshot", "result-grid", "png", "playwright"],
+  "author": "tentechle",
+  "license": "MIT",
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "mysql2": "^3.11.5",
+    "playwright-core": "^1.49.1"
+  }
+}
