@@ -64,6 +64,7 @@ const CSS = `
 .tabs{font-size:12px;padding:4px 10px 0;background:#e4e8ee;border-bottom:1px solid #c5ccd6}
 .tabs span{display:inline-block;padding:3px 12px;background:#fff;border:1px solid #c5ccd6;border-bottom:none;border-radius:3px 3px 0 0}
 .res{padding:6px 8px;background:#fff}
+.error{margin:0;padding:8px;background:#fff2f0;color:#9c1717;border:1px solid #e4aaa5;font:12.5px/1.45 "DejaVu Sans Mono",Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
 table{border-collapse:collapse;font-size:12.5px}
 .grid th{background:#eef1f5;border:1px solid #c9ced6;padding:3px 8px;font-weight:600;text-align:left;white-space:nowrap}
 .grid td{border:1px solid #dde1e7;padding:2px 8px;white-space:nowrap;font-family:"DejaVu Sans","Segoe UI",sans-serif}
@@ -83,6 +84,10 @@ function pageHtml(p) {
   const lines = highlight(sqlShown);
   let body = `<div class="win"><div class="bar"><span><span class="dot"></span><span class="dot" style="background:#f6b26b"></span><span class="dot" style="background:#93c47d"></span></span><span>MySQL 8.0 &nbsp;|&nbsp; root@localhost &nbsp;|&nbsp; Schema: <b>${esc(p.db)}</b></span></div>`;
   body += '<div class="editor">' + lines.map((l, i) => `<pre><span class="ln">${i + 1}</span>${l}</pre>`).join('') + '</div>';
+
+  if (p.error) {
+    body += '<div class="tabs"><span>Error</span></div><div class="res"><pre class="error" role="alert">' + esc(p.error) + '</pre></div>';
+  }
 
   const hasAction = all.some((r) => r.kind === 'ok');
   if (hasAction) {
