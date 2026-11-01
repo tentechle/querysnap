@@ -18,4 +18,5 @@ const { renderAll } = require('./shots');
   for (const p of problems) {
     console.log(`${p.error ? 'ERROR' : 'ok   '} problem ${p.num} -> ${path.join(outDir, `p${p.num}.png`)}${p.error ? '  ' + p.error : ''}`);
   }
+  if (problems.some((p) => p.error)) process.exitCode = 1;
 })().catch((e) => { console.error(e.message); process.exit(1); });
