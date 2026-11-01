@@ -4,7 +4,8 @@
   "description": "Run MySQL queries and save each query with its result grid as a PNG screenshot.",
   "main": "snap.js",
   "scripts": {
-    "snap": "node snap.js examples/example-queries.sql screenshots"
+    "snap": "node snap.js examples/example-queries.sql screenshots",
+    "test": "node --test"
   },
   "keywords": ["mysql", "sql", "screenshot", "result-grid", "png", "playwright"],
   "author": "tentechle",
