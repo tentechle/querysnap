@@ -67,16 +67,19 @@ async function connect() {
 async function runWeek(specFile) {
   const problems = parseSpec(specFile);
   const conn = await connect();
-  for (const p of problems) {
-    await conn.query('USE ' + p.db);
-    try {
-      p.results = await runStatements(conn, p.sql);
-      p.verifyResults = p.verify ? await runStatements(conn, p.verify) : null;
-    } catch (e) {
-      p.error = e.message;
+  try {
+    for (const p of problems) {
+      try {
+        await conn.query('USE ??', [p.db]);
+        p.results = await runStatements(conn, p.sql);
+        p.verifyResults = p.verify ? await runStatements(conn, p.verify) : null;
+      } catch (e) {
+        p.error = e.message;
+      }
     }
+  } finally {
+    await conn.end();
   }
-  await conn.end();
   return problems;
 }
 
