@@ -17,7 +17,7 @@ QuerySnap reads a `.sql` file containing one or more numbered problems, runs eve
 
 ## Requirements
 
-- Node.js 18 or newer
+- Node.js 20 or newer
 - A MySQL 8.x server you can connect to
 - Chromium for Playwright (installed below)
 
