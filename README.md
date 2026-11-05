@@ -69,7 +69,7 @@ Connection settings come from environment variables:
 
 `npm run snap` does the same for the example file.
 
-If a problem fails, its screenshot includes the database error and later problems still run. The command exits with status `1` after rendering all screenshots when any problem fails, and `0` when every problem succeeds.
+If the database connection or a problem fails, its screenshot includes the database error and later problems still run when possible. The command exits with status `1` after rendering all screenshots when any problem fails, and `0` when every problem succeeds.
 
 ## Spec file format
 

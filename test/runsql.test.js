@@ -16,6 +16,26 @@ async function runWithConnection(conn) {
   }
 }
 
+test('records connection failures for every problem', async () => {
+  const createConnection = mysql.createConnection;
+  mysql.createConnection = async () => {
+    throw new Error('connect ECONNREFUSED 127.0.0.1:3306');
+  };
+
+  try {
+    const problems = await runWeek(spec);
+    assert.equal(problems.length, 2);
+    for (const problem of problems) {
+      assert.equal(
+        problem.error,
+        'Database connection failed: connect ECONNREFUSED 127.0.0.1:3306',
+      );
+    }
+  } finally {
+    mysql.createConnection = createConnection;
+  }
+});
+
 test('records database selection failures and continues with later problems', async () => {
   let selections = 0;
   let closed = false;

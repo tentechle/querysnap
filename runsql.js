@@ -66,7 +66,13 @@ async function connect() {
 
 async function runWeek(specFile) {
   const problems = parseSpec(specFile);
-  const conn = await connect();
+  let conn;
+  try {
+    conn = await connect();
+  } catch (error) {
+    const message = `Database connection failed: ${error.message}`;
+    return problems.map((problem) => ({ ...problem, error: message }));
+  }
   try {
     for (const p of problems) {
       try {
